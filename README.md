@@ -79,6 +79,15 @@ const { address: verified } = await verifySignIn({
 
 実際の流れは [デモのログイン例](demo/src/sections/LoginSection.vue) と [模擬サーバー](demo/src/fakeServer.ts) を参照してください。
 
+## 利用しているAPIサーバー
+
+残高・UTXOの取得と送金のブロードキャストには、既定で次の公開サーバーを使っています。いずれも個人の方がボランティアで運用してくださっているものです。モナコインのエコシステムを支えてくださっていることに、この場を借りて感謝します。
+
+- Esplora：`esplora.electrum-mona.org`（通常時）
+- Monaparty：`monapa.electrum-mona.org`、`wallet.monaparty.me`（Esploraの障害時）
+
+負荷をかけすぎないよう、不要な連続取得は避けてください。`MonaWallet` の `provider` オプションで、別のサーバーに差し替えることもできます。
+
 ## 同じウォレットを開くための条件
 
 同じRP IDで同じPasskeyを使えば、同じアドレス（P2PKH）になります。RP IDを変えると別のウォレットになるため、本番では固定値を指定してください。鍵導出の仕様や、その他の設計判断・制約は [docs/design.md](docs/design.md) にまとめています。
