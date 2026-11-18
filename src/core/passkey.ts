@@ -54,7 +54,7 @@ export async function createPasskey(params: CreatePasskeyParams): Promise<{ prfE
       { type: 'public-key', alg: -257 }, // RS256
     ],
     // 再接続時はallowCredentialsを指定せずに選択させるため、発見可能な資格情報が必須。
-    // （既存実装の'preferred'では、セキュリティキーで発見不能な資格情報が作られると再接続できなくなる）
+    // （'preferred'ではセキュリティキーなどで発見不能な資格情報が作られ、二度と開けなくなることがある）
     authenticatorSelection: { residentKey: 'required', requireResidentKey: true, userVerification: 'required' },
     attestation: 'none',
     extensions: { prf: {} },

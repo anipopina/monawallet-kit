@@ -1,7 +1,7 @@
 import * as btcSigner from '@scure/btc-signer'
 import { MONA_NETWORK } from './constants'
 
-/** 送金先として受け付けるMONAアドレスか（M/P/mona1…）。既存実装と同じくbtc-signerのデコード可否で判定する */
+/** 送金先として受け付けるMONAアドレスか（M/P/mona1…）。btc-signerでデコードできるかで判定する */
 export function validateAddress(address: string): boolean {
   try {
     btcSigner.Address(MONA_NETWORK).decode(address)

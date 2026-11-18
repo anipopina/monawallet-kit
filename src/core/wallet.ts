@@ -46,7 +46,7 @@ export type MonaWalletOptions = {
   provider?: ChainProvider
   /** sat/vB */
   feeRate?: number
-  /** 未承認のUTXOも送金に使う（既定true、既存実装と同じ） */
+  /** 未承認のUTXOも送金に使う（既定true） */
   spendUnconfirmed?: boolean
   /** 1回の送金額の上限（sat）。検証環境で誤送金の被害を抑えるための任意設定 */
   maxSendSat?: number
@@ -268,7 +268,7 @@ export class MonaWallet {
     return this.#balance!
   }
 
-  /** API結果に、まだ反映されていない自分の送金（使用済み入力・お釣り）を重ねる（monacube-oldの方式を継承） */
+  /** API結果に、まだ反映されていない自分の送金（使用済み入力・お釣り）を重ねる */
   #recalculate(): void {
     const key = (u: { txid: string; vout: number }) => `${u.txid}:${u.vout}`
     const apiKeys = new Map(this.#apiUtxos.map((u) => [key(u), u]))

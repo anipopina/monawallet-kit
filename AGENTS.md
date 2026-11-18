@@ -70,11 +70,12 @@
 
 この章には本プロジェクトにのみ適用する方針を、決まったものから記載します。未記載の項目を決定済みと扱わないでください。
 
-- 目的・対象ユーザー：MONA関連Webサービスに組み込む、Passkey（WebAuthn PRF）由来のウォレットライブラリ。当面の利用者は開発者本人（Monacube、新Monapaletteなど）。少額・ホビー用途。初期仕様は `tmp/monawallet-kit_spec_v0.1.md`。
+- 目的・対象ユーザー：MONA関連Webサービスに組み込む、Passkey（WebAuthn PRF）由来のウォレットライブラリ。当面の利用者は開発者本人（Monacube、新Monapaletteなど）。少額・ホビー用途で、利便性と適切な安全性のバランスを取る。各サービスが必要な範囲のウォレット機能を組み込む用途特化型とし、あらゆる機能を集約する巨大なウォレットを目指さない。
+- スコープ外：PRF非対応環境への代替ウォレット、複数のPasskeyを同じウォレットに関連付ける仕組み、サービス間でのウォレット共有、MONA以外の暗号資産、AIエージェント等による自動送金、ハードウェアウォレットや高額資産向けの保管、npmレジストリへの公開（将来の選択肢としては妨げない）。Monapartyアセットは必要になったときに検討する。
 - 本プロジェクトはWebアプリではなくライブラリのため、共通ルールのうち公開先（AWSホスティング）、通知ライブラリ（Vue Sonner）などの前提は適用しない。UIの指針は、ライブラリのモーダルとデモに適用する。
-- 採用スタック：TypeScript、Vite（ライブラリモード、ESMのみ）、Vue 3（UIのみ・peerDependency）、Vitest、ESLint、Prettier、pnpm（`packageManager` で版を固定）。暗号・トランザクションは既存実装と同じ `@scure/*` を使い、メッセージ署名は `@noble/curves` で実装した（`bitcoinjs-message` と Buffer ポリフィルを不要にするため）。QR生成は依存のない `uqr`。
+- 採用スタック：TypeScript、Vite（ライブラリモード、ESMのみ）、Vue 3（UIのみ・peerDependency）、Vitest、ESLint、Prettier、pnpm（`packageManager` で版を固定）。暗号・トランザクションは `@scure/*`、メッセージ署名は `@noble/curves` で実装した（導入側に Buffer ポリフィルを要求しないため）。QR生成は依存のない `uqr`。
 - TypeScript は 6.0 系に固定する（typescript-eslint が 7.x に未対応のため）。
-- 判断の詳細・既存実装との差分・制約は [docs/design.md](docs/design.md) に記録する。
+- 判断の詳細と制約は [docs/design.md](docs/design.md) に記録する。
 - 主要なディレクトリと責務：
   - `src/core/`：鍵導出、Passkey/PRF、チェーンAPI、送金、署名、`MonaWallet`（エントリー `monawallet-kit`）
   - `src/vue/`：モーダルと composable（エントリー `monawallet-kit/vue`、CSSは `monawallet-kit/style.css`）

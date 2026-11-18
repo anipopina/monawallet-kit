@@ -79,9 +79,9 @@ const { address: verified } = await verifySignIn({
 
 実際の流れは [デモのログイン例](demo/src/sections/LoginSection.vue) と [模擬サーバー](demo/src/fakeServer.ts) を参照してください。
 
-## 既存アプリとの互換性
+## 同じウォレットを開くための条件
 
-`passkey-monawallet` / `monacube-old` と同じRP IDを指定すれば、同じアドレスになります（P2PKHのみ）。RP IDの扱いや、既存実装との相違点は [docs/design.md](docs/design.md) にまとめています。
+同じRP IDで同じPasskeyを使えば、同じアドレス（P2PKH）になります。RP IDを変えると別のウォレットになるため、本番では固定値を指定してください。鍵導出の仕様や、その他の設計判断・制約は [docs/design.md](docs/design.md) にまとめています。
 
 ## 開発
 

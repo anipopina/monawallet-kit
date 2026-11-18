@@ -19,8 +19,7 @@ export type CoinSelection = {
 
 /**
  * 承認済みを優先し、金額の大きい順にUTXOを足していく。
- * 旧実装は「金額+0.001MONA」で選択を打ち切ってから手数料を計算していたため、入力が多いと残高があっても失敗していた。
- * ここでは入力を追加するたびに手数料込みで判定する。
+ * 入力を追加するたびに手数料込みで判定する（入力が多いほど手数料が増えるため、選択後に手数料を足すと不足しうる）。
  */
 export function selectCoins(utxos: Utxo[], amountSat: number, feeRate: number): CoinSelection {
   const ordered = [...utxos].sort((a, b) => Number(b.confirmed) - Number(a.confirmed) || b.value - a.value)

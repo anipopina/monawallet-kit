@@ -26,7 +26,7 @@ function nonceStore() {
 }
 
 describe('sign-in challenge', () => {
-  it('creates a message in the legacy (monacube-old) format', () => {
+  it('creates a sign-in message in the fixed format', () => {
     const c = createSignInChallenge({
       appName: 'Example',
       origin: 'https://app.example',

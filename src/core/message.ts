@@ -1,6 +1,6 @@
-// Bitcoin互換のメッセージ署名（Monacoin Coreの signmessage / verifymessage、bitcoinjs-message と同じ形式）
+// Bitcoin互換のメッセージ署名（Monacoin Coreの signmessage / verifymessage と同じ形式）
 // 署名: base64( header(1) || r(32) || s(32) )、header = 27 + recoveryId (+4 圧縮公開鍵)
-// 互換性は bitcoinjs-message で生成したテストベクトルで固定している（src/core/message.test.ts）。
+// 形式はテストベクトル（__tests__/vectors.ts）で固定している。
 
 import { secp256k1 } from '@noble/curves/secp256k1.js'
 import { ripemd160 } from '@noble/hashes/legacy.js'
@@ -18,7 +18,7 @@ export function messageHash(message: string): Uint8Array {
 
 export type SignMessageOptions = {
   /**
-   * 署名のnonce生成に乱数を混ぜる（RFC6979 + 追加エントロピー）。既定true（既存実装と同じ）。
+   * 署名のnonce生成に乱数を混ぜる（RFC6979 + 追加エントロピー）。既定true。
    * falseにすると決定的な署名になり、テストベクトルの照合に使える。
    */
   extraEntropy?: boolean

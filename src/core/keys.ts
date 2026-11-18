@@ -14,7 +14,7 @@ export type DerivedKeys = {
 
 /**
  * PRF出力（256bit）をBIP39エントロピーとして扱い、24単語ニーモニック → シード → P2PKH鍵を導出する。
- * monacube-old の MonaWallet(entropy, 'P2PKH') と同じ結果になる（テストベクトルで固定）。
+ * 結果はテストベクトル（__tests__/vectors.ts）で固定している。
  */
 export function deriveKeysFromEntropy(entropy: Uint8Array): DerivedKeys {
   if (entropy.length !== 32) throw new Error('Entropy must be 32 bytes')
@@ -22,7 +22,7 @@ export function deriveKeysFromEntropy(entropy: Uint8Array): DerivedKeys {
 }
 
 export function deriveKeysFromMnemonic(mnemonic: string): DerivedKeys {
-  const seed = bip39.mnemonicToSeedSync(mnemonic) // パスフレーズなし（既存実装と同じ）
+  const seed = bip39.mnemonicToSeedSync(mnemonic) // BIP39パスフレーズは使わない
   const root = HDKey.fromMasterSeed(seed)
   const child = root.derive(DERIVATION_PATH)
   if (!child.publicKey || !child.privateKey) throw new Error('Failed to derive key')

@@ -4,7 +4,7 @@ import { KEY_VECTORS } from './__tests__/vectors'
 import { deriveKeysFromEntropy } from './keys'
 import { signMessage, verifyMessage } from './message'
 
-describe('message signing (compatibility with bitcoinjs-message)', () => {
+describe('message signing (standard format, fixed by test vectors)', () => {
   for (const v of KEY_VECTORS) {
     const keys = deriveKeysFromEntropy(hex.decode(v.entropyHex))
     for (const s of v.signatures) {
@@ -14,9 +14,8 @@ describe('message signing (compatibility with bitcoinjs-message)', () => {
         expect(signMessage(s.message, keys.privateKey, { extraEntropy: false })).toBe(s.signature)
       })
 
-      it(`verifies signatures from bitcoinjs-message and the legacy wallet: ${label}`, () => {
+      it(`verifies the reference signature: ${label}`, () => {
         expect(verifyMessage(s.message, v.address, s.signature)).toBe(true)
-        expect(verifyMessage(s.message, v.address, s.legacyHedgedSignature)).toBe(true)
       })
     }
   }

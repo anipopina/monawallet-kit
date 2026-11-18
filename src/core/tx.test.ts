@@ -7,7 +7,7 @@ const RATE = 200
 const utxo = (value: number, confirmed = true, n = 0): Utxo => ({ txid: String(n).padStart(64, '0'), vout: 0, value, confirmed })
 
 describe('estimateFeeSat', () => {
-  it('matches the legacy P2PKH estimate', () => {
+  it('estimates P2PKH transaction size', () => {
     // 148 * 1 + 34 * 2 + 10 = 226 vB
     expect(estimateFeeSat(1, 2, RATE)).toBe(45_200)
   })
@@ -21,14 +21,14 @@ describe('selectCoins', () => {
     expect(result.changeSat).toBe(1_000_000 - 100_000 - 45_200)
   })
 
-  it('keeps adding inputs until the fee is covered (legacy implementation stopped too early)', () => {
+  it('keeps adding inputs until the fee is covered (fee grows with each input)', () => {
     const utxos = Array.from({ length: 10 }, (_, i) => utxo(100_000, true, i))
     const amount = 500_000
     const result = selectCoins(utxos, amount, RATE)
     const inputTotal = result.inputs.reduce((s, u) => s + u.value, 0)
     expect(inputTotal).toBe(amount + result.feeSat + result.changeSat)
     expect(result.feeSat).toBeGreaterThanOrEqual(estimateFeeSat(result.inputs.length, result.changeSat ? 2 : 1, RATE))
-    expect(result.inputs.length).toBe(8) // 旧実装は6入力（金額+0.001MONA）で打ち切り、残高不足になっていた
+    expect(result.inputs.length).toBe(8)
   })
 
   it('drops dust change into the fee', () => {

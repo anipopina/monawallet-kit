@@ -1,6 +1,6 @@
 // 鍵導出・ネットワークの定数
-// 既存の passkey-monawallet / monacube-old と同じウォレットを再現するため、PRF入力・導出パス・ネットワーク値は変更しないこと。
-// 変更すると既存ユーザーのアドレスが変わり、資金にアクセスできなくなる。
+// PRF入力・導出パス・ネットワーク値は変更しないこと。
+// 変更すると作成済みのウォレットのアドレスが変わり、資金にアクセスできなくなる。
 
 export const SATOSHI_PER_MONA = 100_000_000
 
@@ -20,7 +20,7 @@ export const MONA_NETWORK = {
 /** Bitcoin互換のメッセージ署名プレフィックス（先頭の\x19は続く文字列の長さ25） */
 export const MESSAGE_PREFIX = '\x19Monacoin Signed Message:\n'
 
-// 送金関連の既定値（既存実装の値を継承）
+// 送金関連の既定値
 export const DEFAULT_FEE_RATE_SAT_PER_VBYTE = 200
 /** これ以下の出力はダストとして作らない（お釣りは手数料に回す） */
 export const DUST_THRESHOLD_SAT = 546

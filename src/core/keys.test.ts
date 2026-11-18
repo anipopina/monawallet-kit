@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { KEY_VECTORS } from './__tests__/vectors'
 import { deriveKeysFromEntropy, deriveKeysFromMnemonic, entropyToMnemonic } from './keys'
 
-describe('key derivation (compatibility with monacube-old)', () => {
+describe('key derivation (fixed by test vectors)', () => {
   for (const v of KEY_VECTORS) {
     it(`derives ${v.address}`, () => {
       const entropy = hex.decode(v.entropyHex)
