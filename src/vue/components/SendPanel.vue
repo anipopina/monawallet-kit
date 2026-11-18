@@ -3,10 +3,14 @@ import { computed, shallowRef } from 'vue'
 import { formatMona } from '../../core/amount'
 import type { MonaWallet, SendPlan, SendResult, WalletSnapshot } from '../../core/wallet'
 import { useAsyncAction } from '../composables'
-import CopyButton from './CopyButton.vue'
 import MwkIcon from './MwkIcon.vue'
 
-const { wallet, snapshot } = defineProps<{ wallet: MonaWallet; snapshot: WalletSnapshot }>()
+const { wallet, snapshot, explorerTxUrl } = defineProps<{
+  wallet: MonaWallet
+  snapshot: WalletSnapshot
+  /** {txid} を含むURL。空文字ならエクスプローラーへのリンクを出さない */
+  explorerTxUrl: string
+}>()
 const emit = defineEmits<{ sent: [result: SendResult]; done: [] }>()
 
 const to = shallowRef('')
@@ -18,6 +22,9 @@ const submit = useAsyncAction()
 
 const maxSendSat = wallet.options.maxSendSat
 const locked = computed(() => snapshot.state !== 'unlocked')
+const explorerHref = computed(() =>
+  result.value && explorerTxUrl ? explorerTxUrl.replaceAll('{txid}', encodeURIComponent(result.value.txid)) : null,
+)
 const balanceAfterSat = computed(() => (plan.value && snapshot.balance ? snapshot.balance.totalSat - plan.value.totalSat : null))
 
 async function onPrepare() {
@@ -57,12 +64,16 @@ function reset() {
       <MwkIcon name="check" />
       {{ formatMona(result.plan.amountSat) }} MONA を送金しました
     </p>
-    <p class="mwk-muted">ネットワークで承認されるまで、数分かかることがあります。</p>
+    <p class="mwk-muted">ネットワークで承認されるまで数分かかります</p>
     <div class="mwk-field">
       <span class="mwk-label">トランザクションID</span>
       <span class="mwk-mono mwk-small">{{ result.txid }}</span>
     </div>
-    <CopyButton :text="result.txid" label="IDをコピー" />
+    <a v-if="explorerHref" class="mwk-btn mwk-btn--block" :href="explorerHref" target="_blank" rel="noopener noreferrer">
+      エクスプローラーで開く
+      <MwkIcon name="external" />
+      <span class="mwk-visually-hidden">（新しいタブで開きます）</span>
+    </a>
     <button type="button" class="mwk-btn mwk-btn--block" @click="reset">続けて送る</button>
     <button type="button" class="mwk-btn mwk-btn--primary mwk-btn--block" @click="emit('done')">完了</button>
   </div>
@@ -92,7 +103,7 @@ function reset() {
         <dd>{{ formatMona(balanceAfterSat) }} MONA</dd>
       </div>
     </dl>
-    <p v-if="locked" class="mwk-muted">送金の前にPasskeyでロックを解除します。</p>
+    <p v-if="locked" class="mwk-muted">送金の前にPasskeyでロックを解除します</p>
     <div v-if="submit.error.value" class="mwk-error" role="alert">
       <MwkIcon name="alert" />
       <p>{{ submit.error.value }}</p>
@@ -134,9 +145,7 @@ function reset() {
         />
         <span class="mwk-unit">MONA</span>
       </div>
-      <span v-if="snapshot.balance" class="mwk-muted"
-        >残高 {{ formatMona(snapshot.balance.totalSat) }} MONA（手数料は次の画面で表示します）</span
-      >
+      <span v-if="snapshot.balance" class="mwk-muted">残高 {{ formatMona(snapshot.balance.totalSat) }} MONA</span>
       <span v-if="maxSendSat !== undefined" class="mwk-muted">1回の上限 {{ formatMona(maxSendSat) }} MONA</span>
     </div>
     <div v-if="prepare.error.value" class="mwk-error" role="alert">

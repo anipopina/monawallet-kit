@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, shallowRef, useTemplateRef, watch } from 'vue'
+import { DEFAULT_EXPLORER_TX_URL } from '../core/constants'
 import type { MonaWallet, SendResult } from '../core/wallet'
 import { useMonaWallet } from './composables'
 import BackupPanel from './components/BackupPanel.vue'
@@ -9,7 +10,16 @@ import MwkIcon from './components/MwkIcon.vue'
 import ReceivePanel from './components/ReceivePanel.vue'
 import SendPanel from './components/SendPanel.vue'
 
-const { wallet, title = 'ウォレット' } = defineProps<{ wallet: MonaWallet; title?: string }>()
+const {
+  wallet,
+  title = 'ウォレット',
+  explorerTxUrl = DEFAULT_EXPLORER_TX_URL,
+} = defineProps<{
+  wallet: MonaWallet
+  title?: string
+  /** 送金後に開くエクスプローラーのURL。{txid} がトランザクションIDに置き換わる。空文字でリンクを出さない */
+  explorerTxUrl?: string
+}>()
 const open = defineModel<boolean>('open', { default: false })
 const emit = defineEmits<{ sent: [result: SendResult] }>()
 
@@ -83,6 +93,7 @@ onBeforeUnmount(() => dialog.value?.close())
           v-else-if="activeView === 'send'"
           :wallet="wallet"
           :snapshot="snapshot"
+          :explorer-tx-url="explorerTxUrl"
           @sent="emit('sent', $event)"
           @done="view = 'home'"
         />
@@ -146,9 +157,9 @@ onBeforeUnmount(() => dialog.value?.close())
 }
 
 .mwk-modal-address {
-  margin: 12px 0 0;
+  margin: 18px 0 0;
   color: var(--mwk-muted);
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-align: center;
 }
 

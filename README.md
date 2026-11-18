@@ -48,6 +48,8 @@ const open = shallowRef(false)
 </template>
 ```
 
+送金完了画面の「エクスプローラーで開く」のリンク先は、`explorer-tx-url` で変更できます（`{txid}` がトランザクションIDに置き換わります。空文字にするとボタンを表示しません）。
+
 ### APIを直接使う
 
 ```ts

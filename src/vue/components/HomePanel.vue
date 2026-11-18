@@ -32,7 +32,6 @@ const unlock = useAsyncAction()
       </button>
       <button type="button" class="mwk-btn" :disabled="snapshot.sending" @click="wallet.disconnect()">ウォレットを閉じる</button>
     </div>
-    <p class="mwk-muted">ロック中は残高の確認だけができます。送金やバックアップの表示にはPasskeyでロックを解除します。</p>
     <div v-if="unlock.error.value" class="mwk-error" role="alert">
       <MwkIcon name="alert" />
       <p>{{ unlock.error.value }}</p>
@@ -57,9 +56,5 @@ const unlock = useAsyncAction()
 
 .mwk-home-footer .mwk-btn {
   flex: 1 1 auto;
-}
-
-.mwk-stack > p.mwk-muted {
-  margin: 0;
 }
 </style>

@@ -23,24 +23,9 @@ onBeforeUnmount(() => clearTimeout(timer))
 </script>
 
 <template>
-  <button type="button" class="mwk-btn mwk-copy" @click="copy">
+  <button type="button" class="mwk-btn" @click="copy">
     <MwkIcon :name="status === 'copied' ? 'check' : 'copy'" />
     <span>{{ status === 'copied' ? 'コピーしました' : status === 'failed' ? 'コピーできませんでした' : label }}</span>
     <span class="mwk-visually-hidden" role="status">{{ status === 'copied' ? 'コピーしました' : '' }}</span>
   </button>
 </template>
-
-<style scoped>
-.mwk-copy {
-  position: relative;
-}
-
-.mwk-visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-</style>

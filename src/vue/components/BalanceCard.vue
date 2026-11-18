@@ -23,8 +23,18 @@ onMounted(() => {
 
 <template>
   <section class="mwk-balance" aria-labelledby="mwk-balance-title">
-    <div class="mwk-balance-head">
-      <h3 id="mwk-balance-title" class="mwk-balance-title">残高</h3>
+    <h3 id="mwk-balance-title" class="mwk-balance-title">残高</h3>
+
+    <!-- 取得失敗時も再試行できるよう、更新ボタンは金額の有無にかかわらず表示する -->
+    <div class="mwk-balance-row">
+      <p v-if="balance" class="mwk-balance-amount">
+        <span class="mwk-balance-value">{{ formatMona(balance.totalSat) }}</span>
+        <span class="mwk-balance-unit">MONA</span>
+      </p>
+      <div v-else-if="!refresh.error.value" class="mwk-balance-skeleton" role="status" aria-label="残高を取得しています" />
+      <p v-else class="mwk-balance-amount" aria-hidden="true">
+        <span class="mwk-balance-value">-</span>
+      </p>
       <button
         type="button"
         class="mwk-icon-btn"
@@ -37,15 +47,10 @@ onMounted(() => {
     </div>
 
     <template v-if="balance">
-      <p class="mwk-balance-amount">
-        <span class="mwk-balance-value">{{ formatMona(balance.totalSat) }}</span>
-        <span class="mwk-balance-unit">MONA</span>
-      </p>
       <p v-if="balance.unconfirmedSat !== 0" class="mwk-muted">うち未承認 {{ formatMona(balance.unconfirmedSat) }} MONA</p>
       <p v-if="!balance.includesMempool" class="mwk-muted">現在、未承認の入出金は反映されていない可能性があります。</p>
       <p class="mwk-muted">{{ updatedAt }} 時点</p>
     </template>
-    <div v-else-if="!refresh.error.value" class="mwk-balance-skeleton" role="status" aria-label="残高を取得しています" />
 
     <div v-if="refresh.error.value" class="mwk-error" role="alert">
       <MwkIcon name="alert" />
@@ -56,15 +61,16 @@ onMounted(() => {
 
 <style scoped>
 .mwk-balance {
-  padding: 12px 16px 16px;
+  padding: 12px 16px 14px;
   border-radius: var(--mwk-radius);
   background: var(--mwk-surface);
 }
 
-.mwk-balance-head {
+.mwk-balance-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
+  margin-right: -8px; /* アイコンボタンの余白分、右端を揃える */
 }
 
 .mwk-balance-title {
@@ -75,6 +81,8 @@ onMounted(() => {
 }
 
 .mwk-balance-amount {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -98,6 +106,7 @@ onMounted(() => {
 }
 
 .mwk-balance-skeleton {
+  flex: 1;
   height: 3.2rem;
   border-radius: 8px;
   background: var(--mwk-border);

@@ -7,11 +7,10 @@ const { address } = defineProps<{ address: string }>()
 
 <template>
   <div class="mwk-stack mwk-receive">
-    <p class="mwk-receive-lead">このアドレスにモナコイン（MONA）を送ってもらいます。</p>
     <MwkQrCode :value="address" label="受け取り用アドレスのQRコード" />
     <p class="mwk-mono mwk-receive-address">{{ address }}</p>
     <CopyButton :text="address" label="アドレスをコピー" />
-    <p class="mwk-muted">モナコイン以外の暗号資産は送らないでください。</p>
+    <p class="mwk-muted">モナコイン以外の暗号資産は送らないでください</p>
   </div>
 </template>
 
@@ -21,7 +20,6 @@ const { address } = defineProps<{ address: string }>()
   text-align: center;
 }
 
-.mwk-receive-lead,
 .mwk-receive .mwk-muted {
   margin: 0;
 }

@@ -54,6 +54,7 @@
 /* MARK: Buttons */
 
 .mwk-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -66,6 +67,7 @@
   color: var(--mwk-fg);
   font: inherit;
   font-weight: 600;
+  text-decoration: none; /* リンク（a要素）をボタンの見た目で使う場合 */
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -120,6 +122,16 @@
 .mwk-root :focus-visible {
   outline: 3px solid var(--mwk-focus);
   outline-offset: 2px;
+}
+
+/* 画面には出さず、読み上げにだけ使うテキスト */
+.mwk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* MARK: Text and messages */

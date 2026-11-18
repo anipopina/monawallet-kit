@@ -23,4 +23,4 @@ export {
   type UtxoResult,
 } from './core/providers'
 export { parseSignInMessage, type SignInChallenge } from './auth/challenge'
-export { SATOSHI_PER_MONA, DERIVATION_PATH, PRF_SALT_MESSAGE } from './core/constants'
+export { SATOSHI_PER_MONA, DERIVATION_PATH, PRF_SALT_MESSAGE, DEFAULT_EXPLORER_TX_URL } from './core/constants'

@@ -27,5 +27,8 @@ export const DUST_THRESHOLD_SAT = 546
 /** P2PKH入力・出力・固定部分の概算vsize */
 export const TX_VSIZE = { input: 148, output: 34, overhead: 10 } as const
 
+/** 送金後に開くブロックエクスプローラーのURL。{txid} をトランザクションIDに置き換える */
+export const DEFAULT_EXPLORER_TX_URL = 'https://esplora.electrum-mona.org/tx/{txid}'
+
 /** Esploraが失敗したら、この期間はフォールバック先を優先する */
 export const PROVIDER_FAILOVER_MS = 60_000

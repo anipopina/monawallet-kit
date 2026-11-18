@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 本ライブラリ用に描いた簡易な線画アイコン（外部アイコンセット・CDNに依存しない）。
 // 装飾扱い（aria-hidden）。意味はボタンのラベルやaria-labelで伝える。
-export type IconName = 'close' | 'back' | 'copy' | 'refresh' | 'check' | 'lock' | 'unlock' | 'alert'
+export type IconName = 'close' | 'back' | 'copy' | 'refresh' | 'check' | 'lock' | 'unlock' | 'alert' | 'external'
 
 const { name } = defineProps<{ name: IconName }>()
 
@@ -14,6 +14,7 @@ const PATHS: Record<IconName, string[]> = {
   lock: ['M6 11h12v9H6z', 'M8.5 11V8a3.5 3.5 0 0 1 7 0v3'],
   unlock: ['M6 11h12v9H6z', 'M8.5 11V8a3.5 3.5 0 0 1 6.8-1.2'],
   alert: ['M12 4l9 16H3z', 'M12 10v4.5', 'M12 17.2v.3'],
+  external: ['M14 5h5v5', 'M19 5l-8 8', 'M17 14v5H5V7h5'],
 }
 </script>
 
