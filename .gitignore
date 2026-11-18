@@ -1,0 +1,18 @@
+node_modules/
+dist/
+
+# ローカルの環境変数（共有用サンプルは管理する）
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# AWS CDKの生成物
+cdk.out/
+
+# 一時的なファイルの格納場所
+# 人間とAIの一時的なファイル受け渡しや、AIの作業時の一時的なファイルの格納に使用
+/tmp/
+
+# Blenderのバックアップファイルは除外
+*.blend[0-9]*
