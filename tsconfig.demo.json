@@ -1,0 +1,12 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["demo/src/**/*.ts", "demo/src/**/*.vue"],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.demo.tsbuildinfo",
+    "paths": {
+      "monawallet-kit": ["./src/index.ts"],
+      "monawallet-kit/vue": ["./src/vue/index.ts"],
+      "monawallet-kit/server": ["./src/server/index.ts"]
+    }
+  }
+}

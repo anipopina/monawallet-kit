@@ -70,8 +70,18 @@
 
 この章には本プロジェクトにのみ適用する方針を、決まったものから記載します。未記載の項目を決定済みと扱わないでください。
 
-- 目的・対象ユーザー：未決定
-- 採用スタック・主要な判断理由：未決定
-- 主要なディレクトリと責務：アプリの構成決定後に記載
-- 起動・検証コマンド：実行環境の構築後に記載
-- 公開先・運用上の制約：未決定
+- 目的・対象ユーザー：MONA関連Webサービスに組み込む、Passkey（WebAuthn PRF）由来のウォレットライブラリ。当面の利用者は開発者本人（Monacube、新Monapaletteなど）。少額・ホビー用途。初期仕様は `tmp/monawallet-kit_spec_v0.1.md`。
+- 本プロジェクトはWebアプリではなくライブラリのため、共通ルールのうち公開先（AWSホスティング）、通知ライブラリ（Vue Sonner）などの前提は適用しない。UIの指針は、ライブラリのモーダルとデモに適用する。
+- 採用スタック：TypeScript、Vite（ライブラリモード、ESMのみ）、Vue 3（UIのみ・peerDependency）、Vitest、ESLint、Prettier、pnpm（`packageManager` で版を固定）。暗号・トランザクションは既存実装と同じ `@scure/*` を使い、メッセージ署名は `@noble/curves` で実装した（`bitcoinjs-message` と Buffer ポリフィルを不要にするため）。QR生成は依存のない `uqr`。
+- TypeScript は 6.0 系に固定する（typescript-eslint が 7.x に未対応のため）。
+- 判断の詳細・既存実装との差分・制約は [docs/design.md](docs/design.md) に記録する。
+- 主要なディレクトリと責務：
+  - `src/core/`：鍵導出、Passkey/PRF、チェーンAPI、送金、署名、`MonaWallet`（エントリー `monawallet-kit`）
+  - `src/vue/`：モーダルと composable（エントリー `monawallet-kit/vue`、CSSは `monawallet-kit/style.css`）
+  - `src/server/`・`src/auth/`：サインインのチャレンジ発行・検証（エントリー `monawallet-kit/server`。DOMとVueに依存させない）
+  - `demo/`：動作確認・導入例のデモ。パッケージ名経由で公開APIだけを使う。配布物には含めない
+- 起動・検証コマンド：`pnpm dev`（デモ）、`pnpm check`（型チェック・Lint・テスト）、`pnpm build`、`pnpm format`
+- 互換性：鍵導出（PRFのsalt、BIP39、導出パス、P2PKH）とメッセージ署名の形式は変更禁止。テストベクトル（`src/core/__tests__/vectors.ts`）を書き換えて変更を通してはならない。RP IDは利用側が固定値を指定する。
+- 秘密情報：PRF出力・秘密鍵・ニーモニックを、ログ、例外メッセージ、公開状態（スナップショット）、永続化先に含めない。
+- 配布：`v*` タグのpushで、GitHub Actions が tarball を GitHub Release に添付する。npmレジストリには公開しない。タグのpush（リリース）はユーザーが行う。
+- 送金の動作確認はメインネットで少額で行う（デモは1回 0.01 MONA まで）。自動テストではチェーンAPIをモックする。

@@ -1,0 +1,77 @@
+{
+  "name": "monawallet-kit",
+  "version": "0.1.0",
+  "description": "Passkey (WebAuthn PRF) based Monacoin wallet library for web apps",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./vue": {
+      "types": "./dist/types/vue/index.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./server": {
+      "types": "./dist/types/server/index.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./style.css": "./dist/monawallet-kit.css"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "vite --config demo/vite.config.ts",
+    "build": "pnpm run type-check && pnpm run build:lib",
+    "build:lib": "vite build && vue-tsc -p tsconfig.build.json",
+    "build:demo": "vite build --config demo/vite.config.ts",
+    "type-check": "vue-tsc --build",
+    "test": "vitest run",
+    "lint": "eslint . --fix --cache",
+    "format": "prettier --write .",
+    "check": "pnpm run type-check && pnpm run lint && pnpm run test"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "@scure/base": "^2.4.0",
+    "@scure/bip32": "^2.4.0",
+    "@scure/bip39": "^2.4.0",
+    "@scure/btc-signer": "^2.4.1",
+    "uqr": "^0.1.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.6",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/tsconfig": "^0.9.1",
+    "eslint": "^10.15.0",
+    "eslint-plugin-vue": "^10.12.1",
+    "jiti": "^2.7.0",
+    "prettier": "3.10.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.8",
+    "vitest": "~5.1.0",
+    "vue": "^3.5.45",
+    "vue-tsc": "^3.3.14"
+  }
+}

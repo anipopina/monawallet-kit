@@ -16,3 +16,8 @@ cdk.out/
 
 # Blenderのバックアップファイルは除外
 *.blend[0-9]*
+
+# ライブラリ・デモのビルド成果物、パック結果、ツールのキャッシュ
+dist-demo/
+*.tgz
+.eslintcache

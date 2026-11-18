@@ -1,0 +1,210 @@
+/*
+ * MonaWallet Kit UIの共通スタイル。クラスは mwk- で始め、アプリ側のスタイルと衝突させない。
+ * 色などは --mwk-* トークンで定義しており、アプリ側で .mwk-root に対して上書きできる。
+ */
+
+.mwk-root {
+  --mwk-bg: #ffffff;
+  --mwk-surface: #f5f3ef;
+  --mwk-fg: #1f1b16;
+  --mwk-muted: #5f574d;
+  --mwk-border: #d8d1c6;
+  --mwk-accent: #a24c08;
+  --mwk-accent-fg: #ffffff;
+  --mwk-danger: #b42318;
+  --mwk-danger-bg: #fdecea;
+  --mwk-warn-bg: #fff4d6;
+  --mwk-warn-border: #e6b84a;
+  --mwk-success: #1e7a3c;
+  --mwk-focus: #2563eb;
+  --mwk-radius: 12px;
+  --mwk-font: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --mwk-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  color: var(--mwk-fg);
+  font-family: var(--mwk-font);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mwk-root {
+    --mwk-bg: #1d1a17;
+    --mwk-surface: #2a2622;
+    --mwk-fg: #f3eee7;
+    --mwk-muted: #c2b8aa;
+    --mwk-border: #4a433b;
+    --mwk-accent: #f0a04b;
+    --mwk-accent-fg: #1d1a17;
+    --mwk-danger: #ff8a7f;
+    --mwk-danger-bg: #3d1f1c;
+    --mwk-warn-bg: #3a2f17;
+    --mwk-warn-border: #a57f2a;
+    --mwk-success: #6fd69a;
+    --mwk-focus: #8ab4ff;
+  }
+}
+
+.mwk-root *,
+.mwk-root *::before,
+.mwk-root *::after {
+  box-sizing: border-box;
+}
+
+/* MARK: Buttons */
+
+.mwk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 48px;
+  padding: 0.5em 1.1em;
+  border: 1px solid var(--mwk-border);
+  border-radius: 999px;
+  background: var(--mwk-bg);
+  color: var(--mwk-fg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.mwk-btn:hover:not(:disabled) {
+  background: var(--mwk-surface);
+}
+
+.mwk-btn--primary {
+  border-color: var(--mwk-accent);
+  background: var(--mwk-accent);
+  color: var(--mwk-accent-fg);
+}
+
+.mwk-btn--primary:hover:not(:disabled) {
+  background: var(--mwk-accent);
+  filter: brightness(1.08);
+}
+
+.mwk-btn--block {
+  width: 100%;
+}
+
+.mwk-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.mwk-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--mwk-fg);
+  cursor: pointer;
+}
+
+.mwk-icon-btn:hover:not(:disabled) {
+  background: var(--mwk-surface);
+}
+
+.mwk-icon-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.mwk-root :focus-visible {
+  outline: 3px solid var(--mwk-focus);
+  outline-offset: 2px;
+}
+
+/* MARK: Text and messages */
+
+.mwk-muted {
+  color: var(--mwk-muted);
+  font-size: 0.875rem;
+}
+
+.mwk-mono {
+  font-family: var(--mwk-mono);
+  overflow-wrap: anywhere;
+}
+
+.mwk-notice {
+  display: flex;
+  gap: 0.6em;
+  padding: 0.75em 0.9em;
+  border: 1px solid var(--mwk-warn-border);
+  border-radius: var(--mwk-radius);
+  background: var(--mwk-warn-bg);
+  font-size: 0.875rem;
+}
+
+.mwk-error {
+  display: flex;
+  gap: 0.6em;
+  padding: 0.75em 0.9em;
+  border-radius: var(--mwk-radius);
+  background: var(--mwk-danger-bg);
+  color: var(--mwk-danger);
+  font-size: 0.875rem;
+}
+
+.mwk-notice p,
+.mwk-error p {
+  margin: 0;
+}
+
+.mwk-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* MARK: Forms */
+
+.mwk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mwk-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.mwk-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--mwk-border);
+  border-radius: 10px;
+  background: var(--mwk-bg);
+  color: var(--mwk-fg);
+  font: inherit;
+  font-size: 16px; /* iOSで入力時に拡大されないよう16px以上 */
+}
+
+.mwk-input[aria-invalid='true'] {
+  border-color: var(--mwk-danger);
+}
+
+.mwk-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mwk-root *,
+  .mwk-root *::before,
+  .mwk-root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
