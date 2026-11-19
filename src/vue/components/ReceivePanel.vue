@@ -27,7 +27,7 @@ const { address } = defineProps<{ address: string }>()
 .mwk-receive-address {
   margin: 0;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: var(--mwk-radius-sm);
   background: var(--mwk-surface);
   font-size: 0.95rem;
   user-select: all;

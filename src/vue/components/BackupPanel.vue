@@ -94,8 +94,8 @@ onBeforeUnmount(hide)
   align-items: baseline;
   gap: 0.5em;
   padding: 6px 10px;
-  border: 1px solid var(--mwk-border);
-  border-radius: 8px;
+  border: var(--mwk-border-width) solid var(--mwk-border);
+  border-radius: var(--mwk-radius-sm);
 }
 
 .mwk-word-index {

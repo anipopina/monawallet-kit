@@ -30,6 +30,6 @@ const qr = computed(() => {
   width: 100%;
   max-width: 240px;
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: var(--mwk-radius-sm);
 }
 </style>

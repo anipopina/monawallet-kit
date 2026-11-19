@@ -34,6 +34,7 @@
     "build": "pnpm run type-check && pnpm run build:lib",
     "build:lib": "vite build && vue-tsc -p tsconfig.build.json",
     "build:demo": "vite build --config demo/vite.config.ts",
+    "design-lab": "vite --config docs/design-lab/vite.config.ts",
     "type-check": "vue-tsc --build",
     "test": "vitest run",
     "lint": "eslint . --fix --cache",

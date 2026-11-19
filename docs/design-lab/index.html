@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MonaWallet Kit デザイン比較</title>
+    <link rel="stylesheet" href="./lab.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <h1>MonaWallet Kit デザイン比較</h1>
+      <form class="lab-controls" id="controls">
+        <fieldset>
+          <legend>画面</legend>
+          <label><input type="radio" name="screen" value="connect" />接続</label>
+          <label><input type="radio" name="screen" value="home" checked />ホーム</label>
+          <label><input type="radio" name="screen" value="receive" />受け取り</label>
+          <label><input type="radio" name="screen" value="send" />送金確認</label>
+          <label><input type="radio" name="screen" value="done" />送金完了</label>
+          <label><input type="radio" name="screen" value="error" />エラー</label>
+          <label><input type="radio" name="screen" value="backup" />バックアップ</label>
+        </fieldset>
+        <fieldset>
+          <legend>モード</legend>
+          <label><input type="radio" name="scheme" value="both" checked />両方</label>
+          <label><input type="radio" name="scheme" value="light" />ライト</label>
+          <label><input type="radio" name="scheme" value="dark" />ダーク</label>
+        </fieldset>
+        <fieldset>
+          <legend>幅</legend>
+          <label><input type="radio" name="width" value="desktop" checked />PC</label>
+          <label><input type="radio" name="width" value="mobile" />スマホ</label>
+        </fieldset>
+        <fieldset>
+          <legend>背景のアプリ</legend>
+          <label><input type="radio" name="bg" value="gallery" checked />作品ギャラリー</label>
+          <label><input type="radio" name="bg" value="article" />文章</label>
+          <label><input type="radio" name="bg" value="skeleton" />スケルトン</label>
+        </fieldset>
+        <fieldset>
+          <legend>表示する案</legend>
+          <div id="preset-filter" class="lab-filter"></div>
+        </fieldset>
+      </form>
+    </header>
+    <main id="grid" class="lab-grid"></main>
+    <script type="module" src="./lab.ts"></script>
+  </body>
+</html>

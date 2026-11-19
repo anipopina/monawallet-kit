@@ -184,7 +184,7 @@ function reset() {
 
 .mwk-summary {
   margin: 0;
-  border: 1px solid var(--mwk-border);
+  border: var(--mwk-border-width) solid var(--mwk-border);
   border-radius: var(--mwk-radius);
 }
 
@@ -196,7 +196,7 @@ function reset() {
 }
 
 .mwk-summary-row + .mwk-summary-row {
-  border-top: 1px solid var(--mwk-border);
+  border-top: var(--mwk-border-width) solid var(--mwk-border);
 }
 
 .mwk-summary-row--block {

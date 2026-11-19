@@ -1,0 +1,82 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}
+body {
+  margin: 0;
+  background: Canvas;
+  color: CanvasText;
+}
+.lab-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 16px;
+  border-bottom: 1px solid GrayText;
+  background: Canvas;
+}
+.lab-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+.lab-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.lab-controls fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0;
+  padding: 2px 8px 6px;
+  border: 1px solid GrayText;
+  border-radius: 6px;
+}
+.lab-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+}
+.lab-filter {
+  display: contents;
+}
+.lab-grid {
+  padding: 16px;
+}
+.lab-preset {
+  margin-bottom: 32px;
+}
+.lab-preset h2 {
+  margin: 0;
+}
+.lab-concept {
+  max-width: 70ch;
+  margin: 4px 0;
+}
+.lab-contrast {
+  margin: 0 0 8px;
+  font-size: 0.875rem;
+}
+.lab-contrast.ng {
+  color: #c00;
+}
+.lab-frames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.lab-frames figure {
+  margin: 0;
+}
+.lab-frames iframe {
+  display: block;
+  max-width: calc(100vw - 32px);
+  border: 1px solid GrayText;
+  border-radius: 8px;
+}
+.lab-frames figcaption {
+  font-size: 0.875rem;
+}

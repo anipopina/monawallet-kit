@@ -51,7 +51,7 @@ const unlock = useAsyncAction()
   flex-wrap: wrap;
   gap: 8px;
   padding-top: 8px;
-  border-top: 1px solid var(--mwk-border);
+  border-top: var(--mwk-border-width) solid var(--mwk-border);
 }
 
 .mwk-home-footer .mwk-btn {

@@ -118,15 +118,17 @@ onBeforeUnmount(() => dialog.value?.close())
   max-width: none;
   max-height: calc(100dvh - 32px);
   padding: 0;
-  border: none;
+  border: var(--mwk-modal-border);
   border-radius: var(--mwk-modal-radius);
   background: var(--mwk-bg);
-  box-shadow: 0 20px 60px rgb(0 0 0 / 0.3);
+  box-shadow: var(--mwk-modal-shadow);
   overflow: hidden;
 }
 
 .mwk-modal::backdrop {
-  background: rgb(0 0 0 / 0.45);
+  /* 古いブラウザの ::backdrop はCSS変数を継承しないため、既定値を併記する */
+  background: var(--mwk-backdrop, rgb(14 6 18 / 0.55));
+  backdrop-filter: var(--mwk-backdrop-filter, none);
 }
 
 .mwk-modal-panel {

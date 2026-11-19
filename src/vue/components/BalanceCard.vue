@@ -108,7 +108,7 @@ onMounted(() => {
 .mwk-balance-skeleton {
   flex: 1;
   height: 3.2rem;
-  border-radius: 8px;
+  border-radius: var(--mwk-radius-sm);
   background: var(--mwk-border);
   opacity: 0.5;
   animation: mwk-pulse 1.4s ease-in-out infinite;
