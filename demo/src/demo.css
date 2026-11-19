@@ -145,3 +145,15 @@ pre {
 .demo-ok {
   color: var(--demo-ok);
 }
+
+.demo-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-address-colors {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}

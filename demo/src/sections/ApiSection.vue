@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
 import { formatMona } from 'monawallet-kit'
-import { errorMessage, useMonaWallet } from 'monawallet-kit/vue'
+import { AddressColors, errorMessage, useMonaWallet } from 'monawallet-kit/vue'
 import { wallet } from '../wallet'
 
 // モーダルを使わず、アプリから公開APIを直接呼ぶ例
@@ -34,7 +34,9 @@ async function call(fn: () => unknown) {
         <template v-if="snapshot.sending">（送金中）</template>
       </dd>
       <dt>アドレス</dt>
-      <dd>
+      <dd class="demo-address">
+        <!-- アプリ側でもアドレスの配色を表示できる -->
+        <AddressColors v-if="snapshot.address" :address="snapshot.address" class="demo-address-colors" />
         <code>{{ snapshot.address ?? '-' }}</code>
       </dd>
       <dt>残高</dt>

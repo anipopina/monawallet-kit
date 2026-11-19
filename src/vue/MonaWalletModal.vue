@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, shallowRef, useTemplateRef, watch } from 'vue'
 import { DEFAULT_EXPLORER_TX_URL } from '../core/constants'
 import type { MonaWallet, SendResult } from '../core/wallet'
+import AddressColors from './AddressColors.vue'
 import { useMonaWallet } from './composables'
 import BackupPanel from './components/BackupPanel.vue'
 import ConnectPanel from './components/ConnectPanel.vue'
@@ -102,6 +103,8 @@ onBeforeUnmount(() => dialog.value?.close())
           {{ snapshot.address }}
         </p>
       </div>
+      <!-- アドレスの配色をモーダル下端のフチに表示する -->
+      <AddressColors v-if="snapshot.address" :address="snapshot.address" class="mwk-modal-colors" />
     </div>
   </dialog>
 </template>
@@ -116,7 +119,7 @@ onBeforeUnmount(() => dialog.value?.close())
   max-height: calc(100dvh - 32px);
   padding: 0;
   border: none;
-  border-radius: 20px;
+  border-radius: var(--mwk-modal-radius);
   background: var(--mwk-bg);
   box-shadow: 0 20px 60px rgb(0 0 0 / 0.3);
   overflow: hidden;
@@ -150,6 +153,17 @@ onBeforeUnmount(() => dialog.value?.close())
   font-weight: 700;
 }
 
+.mwk-modal-colors {
+  display: flex;
+  flex: none;
+  align-self: flex-end;
+  width: 40%;
+  height: 4px;
+  /* 右端がモーダルの角丸で切り取られないよう、角丸の分だけ離す */
+  margin-right: var(--mwk-modal-radius);
+  border-radius: 4px 4px 0 0;
+}
+
 .mwk-modal-body {
   padding: 8px 16px 20px;
   overflow-y: auto;
@@ -168,7 +182,7 @@ onBeforeUnmount(() => dialog.value?.close())
   .mwk-modal {
     width: 100vw;
     margin: auto 0 0;
-    border-radius: 20px 20px 0 0;
+    border-radius: var(--mwk-modal-radius) var(--mwk-modal-radius) 0 0;
     max-height: calc(100dvh - 24px);
   }
 

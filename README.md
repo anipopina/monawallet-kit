@@ -61,6 +61,8 @@ await wallet.send(plan) // 承認後に送信
 wallet.signMessage('hello')
 ```
 
+アドレスを8色で表す配色は、`addressColors(address)`（色の配列）や `AddressColors` コンポーネント（`monawallet-kit/vue`、大きさはCSSで指定）でアプリ側からも使えます。モーダル下端のフチにも同じ配色を表示しています。
+
 Vueでは `useMonaWallet(wallet)` で状態（アドレス・残高など）を ref として購読できます。エラーは `MonaWalletError` の `code` で判別し、`errorMessage()`（`monawallet-kit/vue`）で日本語の文言に変換できます。
 
 ### ウォレットでログイン（サーバー側）

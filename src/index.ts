@@ -11,6 +11,7 @@ export {
 export { MonaWalletError, isMonaWalletError, type MonaWalletErrorCode } from './core/errors'
 export { checkPrfSupport, type PrfSupport, type PrfSupportStatus } from './core/passkey'
 export { formatMona, parseMona } from './core/amount'
+export { addressColors } from './core/addressColors'
 export { validateAddress, isP2pkhAddress } from './core/address'
 export { verifyMessage } from './core/message'
 export {
